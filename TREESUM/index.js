@@ -1,4 +1,4 @@
-const arr = [5, 7, [4, [2], 8, [1, 3], 2], [9, []], 1, 8];
+const array = [5, 7, [4, [2], 8, [1, 3], 2], [9, []], 1, 8];
 
 const treeSum = (array) => {
    let result = 0;
@@ -10,4 +10,4 @@ const treeSum = (array) => {
    return result;
 };
 
-console.log(treeSum(arr));
+console.log(treeSum(array));

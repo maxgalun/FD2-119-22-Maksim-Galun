@@ -1,0 +1,1 @@
+function treeSum(array) {}

@@ -4,24 +4,21 @@ const malePensionAge = 63;
 const femalePensionAge = 58;
 const ageLimit = 120;
 
-function isEmptyStr(str) {
-   return !str?.trim();
-}
+const isEmptyStr = (str) => !str?.trim();
 
-function proper(str) {
-   return str.trim()[0].toUpperCase() + str.trim().substring(1).toLowerCase();
-}
+const proper = (str) =>
+   str.trim()[0].toUpperCase() + str.trim().substring(1).toLowerCase();
 
-function getFIO(requestStr) {
+const getFIO = (requestStr) => {
    let response;
    for (;;) {
       response = prompt(requestStr);
       if (!isEmptyStr(response)) break;
    }
    return proper(response);
-}
+};
 
-function getAge(requestStr) {
+const getAge = (requestStr) => {
    let age;
    for (;;) {
       age = prompt(requestStr);
@@ -34,17 +31,15 @@ function getAge(requestStr) {
          break;
    }
    return +age;
-}
+};
 
-function isPensioner(isMale, age) {
-   return (isMale && age >= malePensionAge) ||
-      (!isMale && age >= femalePensionAge)
+const isPensioner = (isMale, age) =>
+   (isMale && age >= malePensionAge) || (!isMale && age >= femalePensionAge)
       ? true
       : false;
-}
 
 const surname = getFIO("Укажите фамилию");
-const name = getFIO("Уажите имя");
+const name = getFIO("Укажите имя");
 const patronymic = getFIO("Укажите отчество");
 const age = getAge("Укажите возраст");
 const isMale = confirm("Ваш пол - мужской?");

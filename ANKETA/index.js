@@ -12,13 +12,13 @@ function proper(str) {
    return str.trim()[0].toUpperCase() + str.trim().substring(1).toLowerCase();
 }
 
-function getFIO(propStr) {
-   let prop;
+function getFIO(requestStr) {
+   let response;
    for (;;) {
-      prop = prompt(`Укажите ${propStr}`);
-      if (!isEmptyStr(prop)) break;
+      response = prompt(requestStr);
+      if (!isEmptyStr(response)) break;
    }
-   return proper(prop);
+   return checkStr(response);
 }
 
 function getAge() {
@@ -43,9 +43,9 @@ function isPensioner(isMale, age) {
       : false;
 }
 
-const surname = getFIO("фамилию");
-const name = getFIO("имя");
-const patronymic = getFIO("отчество");
+const surname = getFIO("Укажите фамилию");
+const name = getFIO("Уажите имя");
+const patronymic = getFIO("Укажите отчество");
 const age = getAge();
 const isMale = confirm("Ваш пол - мужской?");
 

@@ -21,10 +21,10 @@ function getFIO(requestStr) {
    return proper(response);
 }
 
-function getAge() {
+function getAge(requestStr) {
    let age;
    for (;;) {
-      age = prompt("Укажите возраст");
+      age = prompt(requestStr);
       if (
          !isEmptyStr(age) &&
          !isNaN(age) &&
@@ -46,7 +46,7 @@ function isPensioner(isMale, age) {
 const surname = getFIO("Укажите фамилию");
 const name = getFIO("Уажите имя");
 const patronymic = getFIO("Укажите отчество");
-const age = getAge();
+const age = getAge("Укажите возраст");
 const isMale = confirm("Ваш пол - мужской?");
 
 alert(`ваше ФИО: ${surname} ${name} ${patronymic}

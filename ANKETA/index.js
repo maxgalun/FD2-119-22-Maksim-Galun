@@ -8,7 +8,7 @@ function isEmptyStr(str) {
    return !str?.trim();
 }
 
-function checkStr(str) {
+function proper(str) {
    return str.trim()[0].toUpperCase() + str.trim().substring(1).toLowerCase();
 }
 
@@ -18,7 +18,7 @@ function getFIO(propStr) {
       prop = prompt(`Укажите ${propStr}`);
       if (!isEmptyStr(prop)) break;
    }
-   return checkStr(prop);
+   return proper(prop);
 }
 
 function getAge() {

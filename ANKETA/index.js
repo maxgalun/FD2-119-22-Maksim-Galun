@@ -18,7 +18,7 @@ function getFIO(requestStr) {
       response = prompt(requestStr);
       if (!isEmptyStr(response)) break;
    }
-   return checkStr(response);
+   return proper(response);
 }
 
 function getAge() {

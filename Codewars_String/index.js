@@ -53,7 +53,7 @@ console.log(
 /*-------------------------------------------------------------------------------------------------------------------*/
 
 function isIsogram(str) {
-   for (let i = 0; i < str.length; i++) {
+   for (let i = 0; i < str.length - 1; i++) {
       if (str.toLowerCase().includes(str[i].toLowerCase(), i + 1)) {
          return false;
       }
@@ -154,3 +154,24 @@ console.log(catMouse(map1, 5));
 console.log(catMouse(map2, 5));
 console.log(catMouse(map3, 5));
 console.log(catMouse(map4, 21));
+
+console.log(
+   "-----------------------------------------------------------------------------------------------------"
+);
+/*-------------------------------------------------------------------------------------------------------------------*/
+
+function duplicateEncode(word) {
+   let result = "";
+   for (let i = 0; i < word.length; i++) {
+      let checkСharacter = word.slice(0, i) + word.slice(i + 1);
+      checkСharacter.toLowerCase().includes(word[i].toLowerCase())
+         ? (result += ")")
+         : (result += "(");
+   }
+   return result;
+}
+
+console.log(duplicateEncode("din"));
+console.log(duplicateEncode("recede"));
+console.log(duplicateEncode("Success"));
+console.log(duplicateEncode("(( @"));

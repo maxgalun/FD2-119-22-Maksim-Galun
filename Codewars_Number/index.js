@@ -4,7 +4,7 @@ function squares(x, n) {
    let array = [x];
 
    for (let i = 1; i < n; i++) {
-      array.push(Math.pow(array[i - 1], 2));
+      array.push(Math.pow(array[array.length - 1], 2));
    }
 
    return array;

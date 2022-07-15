@@ -22,14 +22,32 @@ console.log("-------------------------------------------------------------");
 /* ---------------------------------------------------------------------------*/
 
 function checkConcatenatedSum(number, n) {
-   console.log(
-      number
+   return (
+      Math.abs(number)
          .toString()
          .split("")
          .map((item) => item.repeat(n))
-         .reduce((sum, current) => sum + Number(current), 0)
+         .reduce((sum, current) => sum + Number(current), 0) == Math.abs(number)
    );
 }
 
 console.log(checkConcatenatedSum(2997, 3));
 console.log(checkConcatenatedSum(-2997, 3));
+
+console.log("-------------------------------------------------------------");
+
+/* ---------------------------------------------------------------------------*/
+
+var FilterString = function (value) {
+   return Number(
+      [...value].filter((value) => Number.isInteger(Number(value))).join("")
+   );
+};
+
+console.log(FilterString("123"));
+console.log(FilterString("a1b2c3"));
+console.log(FilterString("aa1bb2cc3dd"));
+
+console.log("-------------------------------------------------------------");
+
+/* ---------------------------------------------------------------------------*/

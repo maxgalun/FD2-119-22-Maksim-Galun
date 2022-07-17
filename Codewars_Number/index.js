@@ -51,3 +51,15 @@ console.log(FilterString("aa1bb2cc3dd"));
 console.log("-------------------------------------------------------------");
 
 /* ---------------------------------------------------------------------------*/
+
+function nthFibo(n) {
+   if (n < 2) return 0;
+   if (n == 2) return 1;
+   return nthFibo(n - 2) + nthFibo(n - 1);
+}
+
+console.log(nthFibo(1));
+console.log(nthFibo(2));
+console.log(nthFibo(3));
+console.log(nthFibo(4));
+console.log(nthFibo(9));

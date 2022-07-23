@@ -4,32 +4,39 @@ const malePensionAge = 63;
 const femalePensionAge = 58;
 const ageLimit = 120;
 
-const isEmptyStr = (str) => !str?.trim();
+const isEmptyStr = (str) => {
+   return !str?.trim();
+};
+
+const isUncorrectAge = (age) => {
+   return (
+      isEmptyStr(age) ||
+      isNaN(age) ||
+      !Number.isInteger(+age) ||
+      !(+age > 0 && +age < ageLimit)
+   );
+};
 
 const proper = (str) =>
    str.trim()[0].toUpperCase() + str.trim().substring(1).toLowerCase();
 
 const getFIO = (requestStr) => {
    let response;
-   for (;;) {
+
+   do {
       response = prompt(requestStr);
-      if (!isEmptyStr(response)) break;
-   }
+   } while (isEmptyStr(response));
+
    return proper(response);
 };
 
 const getAge = (requestStr) => {
    let age;
-   for (;;) {
+
+   do {
       age = prompt(requestStr);
-      if (
-         !isEmptyStr(age) &&
-         !isNaN(age) &&
-         Number.isInteger(+age) &&
-         +age < ageLimit
-      )
-         break;
-   }
+   } while (isUncorrectAge(age));
+
    return +age;
 };
 

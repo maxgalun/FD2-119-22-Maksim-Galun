@@ -54,3 +54,37 @@ console.log(
    "------------------------------------------------------------------"
 );
 /*--------------------------------------------------------------------------------------*/
+
+function findOutlier(integers) {
+   const isFindEven =
+      integers
+         .slice(0, 3)
+         .reduce((sum, current) => sum + Math.abs(current % 2), 0) < 2
+         ? true
+         : false;
+
+   let outlier;
+
+   integers.every((element) => {
+      outlier = element;
+      return isFindEven ? !(element % 2) : !!(element % 2);
+   });
+
+   return outlier;
+}
+
+console.log(findOutlier([0, 1, 2]));
+console.log(findOutlier([1, 2, 3]));
+console.log(findOutlier([2, 6, 8, 10, 3]));
+console.log(findOutlier([0, 0, 3, 0, 0]));
+console.log(findOutlier([1, 1, 0, 1, 1]));
+console.log(
+   findOutlier([
+      51411647, -130603937, 55416255, 75911203, -117228348, 183201669,
+      189131867, -117177739, -163958425, -72874763, 30992813, -73388043,
+      -166204817, 52213021, 133074187, -33564985, -162752317, 123543511,
+      190188105, -171928543, -131664087, 6912061, -90891119, -140388457,
+      107936189, -102327639, -117683611, 46170447, -173004419, -69489985,
+      36704601,
+   ]) //-117228348
+);

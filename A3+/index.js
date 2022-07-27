@@ -3,7 +3,7 @@
 function palindrome(str) {
    str = str
       .toLowerCase()
-      .replaceAll(/[.,;:?!-—"()\s]/g, "")
+      .replaceAll(/[—.,;:?!-"()\s]/g, "")
       .replaceAll("ё", "е")
       .replaceAll("ъ", "ь");
 
@@ -35,5 +35,11 @@ console.log(
 console.log(
    `Я — арка края - ${
       palindrome("Я — арка края") ? "палиндром" : "не палиндром"
+   }`
+);
+
+console.log(
+   `Саша на полке клопа нашёл - ${
+      palindrome("Саша на полке клопа нашёл") ? "палиндром" : "не палиндром"
    }`
 );

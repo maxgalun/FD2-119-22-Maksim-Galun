@@ -21,4 +21,26 @@ function myTrim(str) {
    return str.substring(startIndex, endIndex);
 }
 
-console.log("$" + myTrim("  string srting string         ") + "$");
+function myTrim2(str) {
+   let startIndex;
+   let endIndex;
+
+   for (let i = 0; i < str.length; i++) {
+      if (str[i] != " ") {
+         startIndex = i;
+         break;
+      }
+   }
+
+   for (let i = str.length - 1; i > -1; i--) {
+      if (str[i] != " ") {
+         endIndex = i + 1;
+         break;
+      }
+   }
+
+   return str.substring(startIndex, endIndex);
+}
+
+console.log("$" + myTrim("     srting srting srting    ") + "$");
+console.log("$" + myTrim2("     srting srting srting    ") + "$");

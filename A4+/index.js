@@ -11,9 +11,7 @@ function format(str) {
 function palindrome(str) {
    if (str.length < 2) return true;
 
-   return str[0] == str[str.length - 1]
-      ? palindrome(str.substring(1, str.length - 1))
-      : false;
+   return str[0] == str[str.length - 1] ? palindrome(str.slice(1, -1)) : false;
 }
 
 let str1 = "А роза упала на лапу Азора";

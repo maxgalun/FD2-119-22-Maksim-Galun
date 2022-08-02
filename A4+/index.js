@@ -1,13 +1,5 @@
 "use strict";
 
-// function format(str) {
-//    return str
-//       .toLowerCase()
-//       .replaceAll(/[—.,;:?!-"()\s]/g, "")
-//       .replaceAll("ё", "е")
-//       .replaceAll("ъ", "ь");
-// }
-
 function palindrome(str) {
    str = str
       .toLowerCase()

@@ -1,10 +1,9 @@
 "use strict";
 
 function calc(exp) {
-   const operatorList = ["*/", "+-"];
+   exp = exp.replace(/\s/g, "");
 
-   console.log("exp " + exp);
-   debugger;
+   const operatorList = ["*/", "+-"];
 
    /*------------------------------------разбор на элементы------------------------------------*/
    let expArr = [];
@@ -28,8 +27,6 @@ function calc(exp) {
          flag = false;
       }
    }
-
-   console.log(expArr);
 
    /*------------------------------------вычисления в скобках------------------------------------*/
 
@@ -55,8 +52,6 @@ function calc(exp) {
    });
 
    if (expArr.length > 3) {
-      console.log("operatorPos " + operatorPos);
-
       return calc(
          expArr.slice(0, operatorPos - 1).join("") +
             calc(expArr.slice(operatorPos - 1, operatorPos + 2).join("")) +
@@ -72,19 +67,21 @@ function calc(exp) {
       let rightOperand = +expArr[operatorPos + 1];
       switch (operator) {
          case "*":
-            return leftOperand * rightOperand;
+            return parseFloat((leftOperand * rightOperand).toPrecision(12));
          case "/":
-            return leftOperand / rightOperand;
+            return parseFloat((leftOperand / rightOperand).toPrecision(12));
          case "+":
-            return leftOperand + rightOperand;
+            return parseFloat((leftOperand + rightOperand).toPrecision(12));
          case "-":
-            return leftOperand - rightOperand;
+            return parseFloat((leftOperand - rightOperand).toPrecision(12));
       }
    } else {
       return expArr;
    }
 }
 
-console.log(calc("-2+(((33.2+1*5)+(-7-1))-4*2)+5"));
-// console.log("ответ " + calc("-2+8-8"));
-// console.log("ответ " + calc("-3--4+(-1*5.5)+2"));
+let expression1 = "-2+(((33.2+1*5)+(-7-1))-4*2)+5";
+let expression2 = "2*(-3+1)";
+
+console.log(`${expression1} = ${calc(expression1)}`);
+console.log(`${expression2} = ${calc(expression2)}`);

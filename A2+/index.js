@@ -48,7 +48,7 @@ function myTrim3(str) {
    }
 
    while (str.endsWith(" ")) {
-      str = str.substring(0, str.length - 1);
+      str = str.slice(0, -1);
    }
 
    return str;

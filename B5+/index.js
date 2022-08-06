@@ -1,7 +1,7 @@
 "use strict";
 
 function buildWrapper(tag) {
-   return function (str, property) {
+   return function (str, attribute) {
       const mnemonics = {
          "&": "&amp;",
          "<": "&lt;",
@@ -12,16 +12,16 @@ function buildWrapper(tag) {
 
       Object.entries(mnemonics).forEach((element) => {
          str = str.replaceAll(element[0], element[1]);
-         Object.entries(property).forEach((item) => {
-            property[item[0]] = item[1].replaceAll(element[0], element[1]);
+         Object.entries(attribute).forEach((item) => {
+            attribute[item[0]] = item[1].replaceAll(element[0], element[1]);
          });
       });
 
-      property = Object.entries(property)
+      attribute = Object.entries(attribute)
          .reduce((acc, current) => acc + `${current[0]}='${current[1]}' `, "")
          .trim();
 
-      return `<${tag} ${property}>${str}<${tag}>`;
+      return `<${tag} ${attribute}>${str}<${tag}>`;
    };
 }
 

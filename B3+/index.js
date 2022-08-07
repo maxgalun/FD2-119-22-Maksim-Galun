@@ -67,13 +67,13 @@ function calc(exp) {
       let rightOperand = +expArr[operatorPos + 1];
       switch (operator) {
          case "*":
-            return parseFloat((leftOperand * rightOperand).toPrecision(12));
+            return parseFloat((leftOperand * rightOperand).toPrecision(16));
          case "/":
-            return parseFloat((leftOperand / rightOperand).toPrecision(12));
+            return parseFloat((leftOperand / rightOperand).toPrecision(16));
          case "+":
-            return parseFloat((leftOperand + rightOperand).toPrecision(12));
+            return parseFloat((leftOperand + rightOperand).toPrecision(16));
          case "-":
-            return parseFloat((leftOperand - rightOperand).toPrecision(12));
+            return parseFloat((leftOperand - rightOperand).toPrecision(16));
       }
    } else {
       return expArr;

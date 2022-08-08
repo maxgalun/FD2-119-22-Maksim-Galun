@@ -57,4 +57,4 @@ function formatNumber(n, f) {
 }
 
 console.log(formatNumber(2.3, "# ### ###.##"));
-console.log(formatNumber(12345.368, "# ### ###.#2"));
+console.log(formatNumber(12345.368, "# ### ###.##"));

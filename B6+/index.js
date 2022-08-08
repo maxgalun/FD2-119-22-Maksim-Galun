@@ -1,30 +1,30 @@
 "use strict";
 
 function formatNumber(n, f) {
-   const format = {};
    const num = {};
+   const format = {};
    const result = {
       int: "",
       fract: "",
    };
 
-   [format.int, format.fract] = String(f).split("."); //int - целая часть, fract - дробная
-   [num.int, num.fract] = String(n).split(".");
+   [format.int, format.fract = []] = String(f).split(".");
 
-   console.log(num.int);
-   console.log(num.fract);
+   if (!format.fract.length) {
+      n = Math.round(n);
+   }
 
-   num.fract = num.fract ?? "0";
+   [num.int, num.fract = "0"] = String(n).split("."); //int - целая часть, fract - дробная
+
    format.int = format.int.split("").reverse();
    num.int = num.int.split("").reverse();
 
-   console.log(num.fract);
-
-   result.fract = (num.fract / Math.pow(10, num.fract.length)).toFixed(
-      format.fract.length
-   );
-
-   console.log(result.fract);
+   result.fract = format.fract.length
+      ? (num.fract / Math.pow(10, num.fract.length))
+           .toFixed(format.fract.length)
+           .toString()
+           .slice(1)
+      : "";
 
    let indexNum = 0;
    for (
@@ -47,7 +47,8 @@ function formatNumber(n, f) {
    result.int += num.int.slice(indexNum).join("");
    result.int = result.int.split("").reverse().join("");
 
-   return result.int + "." + String(result.fract).split(".")[1];
+   return result.int + result.fract;
 }
 
-console.log(formatNumber(1234567421.0055687, "# ### ###.##"));
+console.log(formatNumber(2.3, "# ### ###.##"));
+console.log(formatNumber(12345.368, "# ### ###.##"));

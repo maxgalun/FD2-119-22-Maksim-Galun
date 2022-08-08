@@ -1,6 +1,13 @@
 "use strict";
 
 function formatNumber(n, f) {
+   const formatSign = "#. ";
+
+   if (!f.split("").every((item) => formatSign.includes(item))) {
+      alert(`Ошибка в форматной строке ${f}`);
+      return;
+   }
+
    const num = {};
    const format = {};
    const result = {
@@ -27,6 +34,7 @@ function formatNumber(n, f) {
       : "";
 
    let indexNum = 0;
+
    for (
       let indexFormat = 0;
       indexNum < num.int.length && format.int[indexFormat];
@@ -39,8 +47,6 @@ function formatNumber(n, f) {
          case " ":
             result.int += " ";
             break;
-         default:
-            return "Ошибка формата";
       }
    }
 
@@ -51,4 +57,4 @@ function formatNumber(n, f) {
 }
 
 console.log(formatNumber(2.3, "# ### ###.##"));
-console.log(formatNumber(12345.368, "# ### ###.##"));
+console.log(formatNumber(12345.368, "# ### ###.#2"));

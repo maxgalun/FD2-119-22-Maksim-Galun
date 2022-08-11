@@ -63,3 +63,16 @@ console.log(nthFibo(2));
 console.log(nthFibo(3));
 console.log(nthFibo(4));
 console.log(nthFibo(9));
+
+console.log("-------------------------------------------------------------");
+
+/* ---------------------------------------------------------------------------*/
+function moveZeros(arr) {
+   return [
+      ...arr.filter((item) => item !== 0),
+      ...arr.filter((item) => item === 0),
+   ];
+}
+
+console.log(moveZeros([false, 1, 0, 1, 2, 0, 1, 3, "a"]));
+console.log(moveZeros([1, 2, 0, 1, 0, 1, 0, 3, 0, 1]));

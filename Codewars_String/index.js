@@ -175,3 +175,161 @@ console.log(duplicateEncode("din"));
 console.log(duplicateEncode("recede"));
 console.log(duplicateEncode("Success"));
 console.log(duplicateEncode("(( @"));
+
+console.log(
+   "-----------------------------------------------------------------------------------------------------"
+);
+/*-------------------------------------------------------------------------------------------------------------------*/
+
+function firstNonRepeatingLetter(s) {
+   let letter = "";
+
+   [...s].every((element) => {
+      if (
+         [...s].filter((item) => item.toLowerCase() == element.toLowerCase())
+            .length > 1
+      )
+         return true;
+      letter = element;
+      return false;
+   });
+
+   return letter;
+}
+
+console.log(firstNonRepeatingLetter("a"));
+console.log(firstNonRepeatingLetter("stress"));
+console.log(firstNonRepeatingLetter("moonmen"));
+
+console.log(
+   "-----------------------------------------------------------------------------------------------------"
+);
+/*-------------------------------------------------------------------------------------------------------------------*/
+
+var maxSequence = function (arr) {
+   let maxSequence = 0;
+
+   arr.forEach((element, index) => {
+      if (element < 0) return;
+
+      arr.slice(index).reduce((acc, current) => {
+         acc += current;
+         if (acc > maxSequence) maxSequence = acc;
+         return acc;
+      }, 0);
+   });
+
+   return maxSequence;
+};
+
+console.log(maxSequence([]));
+console.log(maxSequence([-2, 4, -5, 2, 7]));
+
+console.log(
+   "-----------------------------------------------------------------------------------------------------"
+);
+/*-------------------------------------------------------------------------------------------------------------------*/
+
+var maxSequence2 = function (arr) {
+   var currentSum = 0;
+   return arr.reduce(function (maxSum, number) {
+      console.log("currentSum " + currentSum);
+      console.log("maxSum " + maxSum);
+      console.log("number " + number);
+
+      currentSum = Math.max(currentSum + number, 0);
+
+      console.log("currentSum " + currentSum);
+      console.log("------------------------------");
+
+      return Math.max(currentSum, maxSum);
+   }, 0);
+};
+
+console.log(maxSequence2([-2, 4, -5, 2, 7]));
+
+console.log(
+   "-----------------------------------------------------------------------------------------------------"
+);
+/*-------------------------------------------------------------------------------------------------------------------*/
+
+function orderWeight(strng) {
+   return strng
+      .trim()
+      .split(" ")
+      .sort((a, b) => {
+         const aInt = a.split("").reduce((acc, current) => +acc + +current);
+         const bInt = b.split("").reduce((acc, current) => +acc + +current);
+         if (aInt < bInt) return -1;
+         if (aInt > bInt) return 1;
+         if (a < b) return -1;
+         if (a > b) return 1;
+         return 0;
+      })
+      .join(" ");
+}
+
+console.log(orderWeight("103 123 4444 99 2000"));
+console.log(orderWeight("2000 10003 1234000 44444444 9999 11 11 22 123"));
+console.log(orderWeight("2000 103 123 4444 99"));
+
+console.log(
+   "-----------------------------------------------------------------------------------------------------"
+);
+/*-------------------------------------------------------------------------------------------------------------------*/
+
+function mix(s1, s2) {
+   s1 = [...s1].filter((element) => !!~element.search(/[a-z]/));
+   const hash1 = {};
+   s2 = [...s2].filter((element) => !!~element.search(/[a-z]/));
+   const hash2 = {};
+   let hash3 = {};
+
+   new Set(s1).forEach((element) => {
+      if (s1.filter((item) => item == element).length > 1)
+         hash1[element] = s1.filter((item) => item == element).length;
+   });
+
+   new Set(s2).forEach((element) => {
+      if (s2.filter((item) => item == element).length > 1)
+         hash2[element] = s2.filter((item) => item == element).length;
+   });
+
+   console.log(s1);
+   console.log(s2);
+   console.log(hash1);
+   console.log(hash2);
+
+   function concatHash(hash1, hash2) {
+      for (let key in hash2) {
+         if (key in hash1) {
+            if (hash2[key] > hash1[key]) {
+               hash3[key.repeat(hash2[key])] = 2;
+            }
+            if (hash2[key] < hash1[key]) {
+               hash3[key.repeat(hash1[key])] = 1;
+            }
+            if (hash2[key] == hash1[key]) {
+               hash3[key.repeat(hash1[key])] = "=:";
+            }
+         } else {
+            hash3[key.repeat(hash2[key])] = 2;
+         }
+      }
+   }
+
+   concatHash(hash1, hash2);
+   concatHash(hash2, hash1);
+   hash3 = Object.entries(hash3);
+   console.log(hash3);
+
+   hash3.sort((a, b) => {
+      if (a[0].length > b[0].length) return -1;
+      if (a[0].length < b[0].length) return 1;
+      return 0;
+   });
+
+   console.log(hash3);
+}
+
+mix("Are they here ww", "yes, they are here");

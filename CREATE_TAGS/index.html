@@ -5,30 +5,41 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Document</title>
-      <style>
-         input {
-            margin-bottom: 10px;
-            width: 300px;
-         }
-
-         button {
-            width: 50px;
-         }
-
-         #app {
-            padding-top: 15px;
-            border-top: 1px solid grey;
-         }
-      </style>
+      <link rel="stylesheet" href="style.css" />
    </head>
-   <body>
-      <input placeholder="enter <h1> content" type="text" />
-      <button onclick="createElem(this, 'h1')">h1</button><br />
-      <input placeholder="enter <p> content" type="text" />
-      <button onclick="createElem(this, 'p')">p</button><br />
-      <input placeholder="enter <span> content" type="text" />
-      <button onclick="createElem(this, 'span')">span</button><br />
-      <div id="app">ddd</div>
+   <body class="body">
+      <form class="form" name="formMain" action="#">
+         <button class="form__button" data-tag="h1">h1</button>
+         <button class="form__button" data-tag="p">p</button>
+         <button class="form__button" data-tag="span">span</button>
+         <button class="form__button" data-tag="ul">ul</button>
+      </form>
+
+      <div id="modal" class="body__modal modal">
+         <div class="modal__popup popup">
+            <div class="popup__content">
+               <form name="formModal" action="#">
+                  <div class="popup__header">
+                     <div id="popup__title" class="popup__title"></div>
+                  </div>
+                  <div class="popup__body">
+                     <input
+                        id="popup__input"
+                        class="popup__input"
+                        placeholder="enter content"
+                        type="text"
+                     />
+                  </div>
+                  <button id="plus" class="popup__plus">+</button>
+                  <div id="popup__footer" class="popup__footer">
+                     <button class="popup__button" data-add>Добавить</button>
+                     <button class="popup__button">Отменить</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+      <div id="app"></div>
       <script src="index.js"></script>
    </body>
 </html>

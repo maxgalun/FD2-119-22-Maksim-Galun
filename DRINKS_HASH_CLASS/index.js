@@ -1,25 +1,25 @@
-class HashStorageClass {
-   hash = {};
+class _HashStorageClass {
+   _hash = {};
 
    addValue = function (key, value) {
-      this.hash[key] = value;
+      this._hash[key] = value;
    };
 
    getValue = function (key) {
-      return this.hash[key];
+      return this._hash[key];
    };
 
    deleteValue = function (key) {
-      if (key in this.hash) return delete this.hash[key];
+      if (key in this._hash) return delete this._hash[key];
       return false;
    };
 
    getKeys = function () {
-      return Object.keys(this.hash);
+      return Object.keys(this._hash);
    };
 }
 
-const drinkStorage = new HashStorageClass();
+const drinkStorage = new _HashStorageClass();
 
 function addDrink() {
    const name = prompt("Укажите название напитка");

@@ -1,23 +1,25 @@
-function HashStorageFunc() {
-   const hash = {};
+class HashStorageClass {
+   hash = {};
 
-   this.addValue = function (key, value) {
-      hash[key] = value;
+   addValue = function (key, value) {
+      this.hash[key] = value;
    };
-   this.getValue = function (key) {
-      return hash[key];
+
+   getValue = function (key) {
+      return this.hash[key];
    };
-   this.deleteValue = function (key) {
-      if (key in hash) return delete hash[key];
+
+   deleteValue = function (key) {
+      if (key in this.hash) return delete this.hash[key];
       return false;
    };
 
-   this.getKeys = function () {
-      return Object.keys(hash);
+   getKeys = function () {
+      return Object.keys(this.hash);
    };
 }
 
-const drinkStorage = new HashStorageFunc();
+const drinkStorage = new HashStorageClass();
 
 function addDrink() {
    const name = prompt("Укажите название напитка");

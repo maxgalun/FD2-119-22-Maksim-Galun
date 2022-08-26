@@ -1,37 +1,99 @@
-document.forms.formMain.addEventListener("click", function (event) {
-   if (event.target.tagName == "BUTTON") {
-      const tag = event.target.dataset.tag;
-      document.getElementById(
-         "popup__title"
-      ).textContent = `Укажите содержимое для элемента <${tag}>`;
-      document.getElementById("modal").style.display = "block";
-      if (tag == "ul") document.getElementById("plus").style.display = "block";
-   }
-});
+class Form {
+  constructor(form) {
+    this._form = form;
+    form.onclick = this.onClick.bind(this);
+  }
 
-document.getElementById("plus").addEventListener("click", function () {
-   const clone = document.getElementById("popup__input").cloneNode();
-   document.getElementsByClassName("popup__body")[0].appendChild(clone);
-});
-
-document
-   .getElementById("popup__footer")
-   .addEventListener("click", function (event) {
-      console.log(event.target.dataset.add);
-
-      if (event.target.dataset.add != undefined) {
-         addElement();
+  createPopup(tag) {
+    document.getElementById("modal").style.display = "block";
+    const popupHTML = `<div class="modal__popup popup">
+   <div class="popup__content">
+      <div class="popup__header">
+         <div class="popup__title">Укажите содержимое для элемента ${tag}</div>
+      </div>
+      <div class="popup__body">
+      <input type="text" class="popup__input" placeholder='enter content'>
+      </div>
+      ${
+        tag == "ul"
+          ? '<button id="plus" class="popup__plus" data-action="clone">+</button>'
+          : ""
       }
-      document.getElementById("modal").style.display = "none";
-      document.getElementById("plus").style.display = "none";
-   });
+      <div id="popup__footer" class="popup__footer">
+         <button class="popup__button" data-action="add">
+            Добавить
+         </button>
+         <button class="popup__button" data-action="cancel">
+            Отменить
+         </button>
+      </div>
+   </div>
+</div>`;
 
-function addElement() {
-   console.log("addElement2");
-   // const contentElement = button.previousElementSibling;
-   // const tagElement = document.createElement(tag);
-   // const textNode = document.createTextNode(contentElement.value);
-   // tagElement.append(textNode);
-   // document.getElementById("app").appendChild(tagElement);
-   // contentElement.value = null;
+    document.getElementById("modal").innerHTML = popupHTML;
+  }
+
+  cancel() {
+    document.getElementsByClassName("popup")[0].remove();
+    document.getElementById("modal").style.display = "none";
+  }
+
+  add(tag) {
+    let childNode;
+    switch (tag) {
+      case "ul":
+        const ul = document.createElement("ul");
+
+        [...document.getElementsByClassName("popup__input")].forEach(
+          (element) => {
+            if (element.value) {
+              const textNode = document.createTextNode(element.value);
+              const li = document.createElement("li");
+              li.appendChild(textNode);
+              ul.appendChild(li);
+            }
+          }
+        );
+        childNode = ul;
+
+        break;
+
+      default:
+        const textNode = document.createTextNode(
+          document.getElementsByClassName("popup__input")[0].value
+        );
+        const tagNode = document.createElement(tag);
+        tagNode.appendChild(textNode);
+        childNode = tagNode;
+        break;
+    }
+
+    document.getElementById("app").appendChild(childNode);
+
+    this.cancel();
+  }
+
+  clone() {
+    const inputElement = document
+      .getElementsByClassName("popup__input")[0]
+      .cloneNode();
+    inputElement.value = "";
+    document.getElementsByClassName("popup__body")[0].appendChild(inputElement);
+  }
+
+  onClick(event) {
+    const tag = event.target.dataset.tag;
+    const action = event.target.dataset.action;
+
+    if (tag) {
+      this.tag = tag;
+      this.createPopup(tag);
+    }
+
+    if (action) {
+      this[action](this.tag);
+    }
+  }
 }
+
+new Form(document.forms.form1);

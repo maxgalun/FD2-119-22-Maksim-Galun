@@ -1,45 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Document</title>
-      <link rel="stylesheet" href="style.css" />
-   </head>
-   <body class="body">
-      <form class="form" name="formMain" action="#">
-         <button class="form__button" data-tag="h1">h1</button>
-         <button class="form__button" data-tag="p">p</button>
-         <button class="form__button" data-tag="span">span</button>
-         <button class="form__button" data-tag="ul">ul</button>
-      </form>
-
-      <div id="modal" class="body__modal modal">
-         <div class="modal__popup popup">
-            <div class="popup__content">
-               <form name="formModal" action="#">
-                  <div class="popup__header">
-                     <div id="popup__title" class="popup__title"></div>
-                  </div>
-                  <div class="popup__body">
-                     <input
-                        id="popup__input"
-                        class="popup__input"
-                        placeholder="enter content"
-                        type="text"
-                     />
-                  </div>
-                  <button id="plus" class="popup__plus">+</button>
-                  <div id="popup__footer" class="popup__footer">
-                     <button class="popup__button" data-add>Добавить</button>
-                     <button class="popup__button">Отменить</button>
-                  </div>
-               </form>
-            </div>
-         </div>
-      </div>
-      <div id="app"></div>
-      <script src="index.js"></script>
-   </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="body">
+    <form class="form" name="form1" action="#">
+      <button class="form__button" data-tag="h1">h1</button>
+      <button class="form__button" data-tag="p">p</button>
+      <button class="form__button" data-tag="span">span</button>
+      <button class="form__button" data-tag="ul">li</button>
+      <div id="modal" class="body__modal modal"></div>
+    </form>
+    <div id="app"></div>
+    <script src="index.js"></script>
+  </body>
 </html>

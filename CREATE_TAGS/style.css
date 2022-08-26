@@ -21,7 +21,7 @@ input {
 .body__modal {
    position: fixed;
    top: 0px;
-   left: 0px;
+   right: 0px;
 }
 
 .modal {
@@ -30,6 +30,7 @@ input {
    height: 100vh;
    background-color: rgba(128, 128, 128, 0.6);
    z-index: 1000;
+   overflow-y: auto;
 }
 
 .modal__popup {
@@ -47,9 +48,6 @@ input {
 }
 
 .popup__content {
-   display: flex;
-   flex-direction: column;
-   gap: 6px;
    height: 100%;
    padding: 20px;
 }
@@ -65,10 +63,11 @@ input {
 }
 
 .popup__body {
-   display: flex;
+   /* display: flex;
    flex-direction: column;
-   gap: 5px;
+   gap: 5px; */
    max-height: 300px;
+   margin-bottom: 5px;
    overflow-y: auto;
 }
 
@@ -76,8 +75,9 @@ input {
    display: block;
    width: 100%;
    border: 1px solid #bfbebe;
-   border-radius: 5px;
+   border-radius: 2px;
    padding: 5px;
+   margin-bottom: 2px;
 }
 
 .popup__button {
@@ -86,11 +86,11 @@ input {
 }
 
 .popup__plus {
-   display: none;
+
    align-self: flex-start;
 }
 
 .popup__footer {
+   text-align: center;
    padding-top: 20px;
-   align-self: center;
 }

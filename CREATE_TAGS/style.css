@@ -9,16 +9,16 @@ input {
    background-color: transparent;
 }
 
-.form {
+.menu {
    padding: 20px;
 }
 
-.form__button {
+.menu__button {
    width: 100px;
    height: 30px;
 }
 
-.body__modal {
+.menu__modal {
    position: fixed;
    top: 0px;
    right: 0px;
@@ -86,7 +86,6 @@ input {
 }
 
 .popup__plus {
-
    align-self: flex-start;
 }
 

@@ -1,6 +1,5 @@
 class Menu {
    constructor(form) {
-      this._form = form;
       form.onclick = this.onClick.bind(this);
    }
 
@@ -31,6 +30,7 @@ class Menu {
 </div>`;
 
       document.getElementById("modal").innerHTML = popupHTML;
+      document.getElementsByClassName("popup__input")[0].focus();
    }
 
    cancel() {

@@ -27,9 +27,17 @@ function createForm(form, dataArray) {
             });
             break;
 
+         case "submit":
+            formElement = document.createElement("button");
+            formElement.type = "submit";
+            formElementText = document.createTextNode(item.caption);
+            formElement.appendChild(formElementText);
+            form.appendChild(formElement); //
+            break;
+
          case "combo":
             formElement = document.createElement("select");
-            formElement.name = item.name;
+            formElement.name = item.name; //
             item.variants.forEach((variant) => {
                const optionElement = document.createElement("option");
                const optionText = document.createTextNode(variant.text);
@@ -37,53 +45,45 @@ function createForm(form, dataArray) {
                optionElement.appendChild(optionText);
                formElement.appendChild(optionElement);
             });
-            form.appendChild(formElement);
+            form.appendChild(formElement); //
             break;
 
          case "memo":
             formElement = document.createElement("textarea");
-            formElement.name = item.name;
+            formElement.name = item.name; //
             formElement.rows = 5;
             formElement.cols = 80;
-            form.appendChild(formElement);
+            form.appendChild(formElement); //
             break;
 
          case "longtext":
             formElement = document.createElement("input");
-            formElement.name = item.name;
+            formElement.name = item.name; //
             formElement.style.width = "600px";
-            form.appendChild(formElement);
+            form.appendChild(formElement); //
             break;
 
          case "shorttext":
             formElement = document.createElement("input");
-            formElement.name = item.name;
+            formElement.name = item.name; //
             formElement.style.width = "300px";
-            form.appendChild(formElement);
+            form.appendChild(formElement); //
             break;
 
          case "number":
             formElement = document.createElement("input");
-            formElement.name = item.name;
+            formElement.name = item.name; //
             formElement.type = "number";
             formElement.style.width = "50px";
-            form.appendChild(formElement);
+            form.appendChild(formElement); //
             break;
 
          case "check":
             formElement = document.createElement("input");
-            formElement.name = item.name;
+            formElement.name = item.name; //
             formElement.type = "checkbox";
             formElement.checked = true;
-            form.appendChild(formElement);
-            break;
-
-         case "submit":
-            formElement = document.createElement("button");
-            formElement.type = "submit";
-            formElementText = document.createTextNode(item.caption);
-            formElement.appendChild(formElementText);
-            form.appendChild(formElement);
+            form.appendChild(formElement); //
             break;
       }
 
@@ -91,7 +91,6 @@ function createForm(form, dataArray) {
       form.appendChild(formElement);
    });
 }
-const form = document.forms.form1;
 
 var formDef1 = [
    { label: "Название сайта:", kind: "longtext", name: "sitename" },
@@ -131,5 +130,5 @@ var formDef2 = [
    { caption: "Зарегистрироваться", kind: "submit" },
 ];
 
-createForm(form, formDef1);
-createForm(form, formDef2);
+createForm(document.forms.form1, formDef1);
+createForm(document.forms.form2, formDef2);

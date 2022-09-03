@@ -71,6 +71,14 @@ function createForm(form, dataArray) {
             form.appendChild(formElement);
             break;
 
+         case "date":
+            formElement = document.createElement("input");
+            formElement.name = item.name;
+            formElement.type = "date";
+            formElement.style.width = "150px";
+            form.appendChild(formElement);
+            break;
+
          case "number":
             formElement = document.createElement("input");
             formElement.name = item.name;
@@ -94,8 +102,10 @@ function createForm(form, dataArray) {
 }
 
 var formDef1 = [
+   { label: "Разработчики:", kind: "longtext", name: "author" },
    { label: "Название сайта:", kind: "longtext", name: "sitename" },
    { label: "URL сайта:", kind: "longtext", name: "siteurl" },
+   { label: "Дата запуска сайта:", kind: "date", name: "startdate" },
    { label: "Посетителей в сутки:", kind: "number", name: "visitors" },
    { label: "E-mail для связи:", kind: "shorttext", name: "email" },
    {
@@ -123,13 +133,4 @@ var formDef1 = [
    { caption: "Опубликовать", kind: "submit" },
 ];
 
-var formDef2 = [
-   { label: "Фамилия:", kind: "longtext", name: "lastname" },
-   { label: "Имя:", kind: "longtext", name: "firstname" },
-   { label: "Отчество:", kind: "longtext", name: "secondname" },
-   { label: "Возраст:", kind: "number", name: "age" },
-   { caption: "Зарегистрироваться", kind: "submit" },
-];
-
 createForm(document.forms.form1, formDef1);
-createForm(document.forms.form2, formDef2);

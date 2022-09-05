@@ -109,39 +109,46 @@ function createForm(form, dataArray) {
 
 function validForm(form) {
    form.addEventListener("focusout", focusoutHandler);
-   form.addEventListener("focusin", focusinHandler);
+   form.addEventListener("click", clickHandler);
    form.addEventListener("submit", submitHandler);
 
    function focusoutHandler(event) {
       const target = event.target;
+
+      if (target.nextElementSibling.classList.contains("error")) {
+         target.nextElementSibling.remove();
+      }
+
       const errorElement = document.createElement("label");
       errorElement.classList.add("error");
 
-      if (/[А-Яа-я]/.test(target.value)) {
-         errorElement.innerText +=
-            "[Ошибка: значение должно содержать только символы латиницы]";
-         target.after(errorElement);
-      }
+      if (!target.nextElementSibling.classList.contains("error")) {
+         if (/[А-Яа-я]/.test(target.value)) {
+            errorElement.innerText +=
+               "[Ошибка: значение должно содержать только символы латиницы]";
+            target.after(errorElement);
+         }
 
-      switch (target.name) {
-         case "email":
-            if (target.value && !/@/.test(target.value)) {
-               errorElement.innerText +=
-                  "[Ошибка: укажите вашу электронную почту в формате name@domain.com]";
-               target.after(errorElement);
-            }
-            break;
-         case "visitors":
-            if (target.value && target.value < 0) {
-               errorElement.innerText +=
-                  "[Ошибка: значение должно быть положительным числом]";
-               target.after(errorElement);
-            }
-            break;
+         switch (target.name) {
+            case "email":
+               if (target.value && !/@/.test(target.value)) {
+                  errorElement.innerText +=
+                     "[Ошибка: укажите вашу электронную почту в формате name@domain.com]";
+                  target.after(errorElement);
+               }
+               break;
+            case "visitors":
+               if (target.value && target.value < 0) {
+                  errorElement.innerText +=
+                     "[Ошибка: значение должно быть положительным числом]";
+                  target.after(errorElement);
+               }
+               break;
+         }
       }
    }
 
-   function focusinHandler(event) {
+   function clickHandler(event) {
       const target = event.target;
       if (target.nextElementSibling.classList.contains("error")) {
          target.nextElementSibling.remove();
@@ -165,6 +172,8 @@ function validForm(form) {
          }
 
          if (flag && element.nextElementSibling.classList.contains("error")) {
+            element.scrollIntoView();
+            element.focus();
             flag = false;
          }
       });

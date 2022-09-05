@@ -18,6 +18,7 @@ function createForm(form, dataArray) {
                formElement.name = item.name;
                formElement.value = variant.value;
                formElement.id = variant.value;
+               formElement.checked = true;
                const labelElement = document.createElement("label");
                const labelText = document.createTextNode(variant.text);
                labelElement.setAttribute("for", variant.value);
@@ -25,6 +26,7 @@ function createForm(form, dataArray) {
                form.appendChild(formElement);
                form.appendChild(labelElement);
             });
+
             break;
 
          case "submit":
@@ -96,20 +98,117 @@ function createForm(form, dataArray) {
             break;
       }
 
+      if (item.required) {
+         formElement.setAttribute("data-required", "");
+      }
+
       formElement = document.createElement("br");
       form.appendChild(formElement);
    });
 }
 
+function validForm(form) {
+   form.addEventListener("focusout", focusoutHandler);
+   form.addEventListener("focusin", focusinHandler);
+   form.addEventListener("submit", submitHandler);
+
+   function focusoutHandler(event) {
+      const target = event.target;
+      const errorElement = document.createElement("label");
+      errorElement.classList.add("error");
+
+      if (/[А-Яа-я]/.test(target.value)) {
+         errorElement.innerText +=
+            "[Ошибка: значение должно содержать только символы латиницы]";
+         target.after(errorElement);
+      }
+
+      switch (target.name) {
+         case "email":
+            if (target.value && !/@/.test(target.value)) {
+               errorElement.innerText +=
+                  "[Ошибка: укажите вашу электронную почту в формате name@domain.com]";
+               target.after(errorElement);
+            }
+            break;
+         case "visitors":
+            if (target.value && target.value < 0) {
+               errorElement.innerText +=
+                  "[Ошибка: значение должно быть положительным числом]";
+               target.after(errorElement);
+            }
+            break;
+      }
+   }
+
+   function focusinHandler(event) {
+      const target = event.target;
+      if (target.nextElementSibling.classList.contains("error")) {
+         target.nextElementSibling.remove();
+      }
+   }
+
+   function submitHandler(event) {
+      let flag = true; //признак валидации
+
+      [...form.elements].forEach((element) => {
+         const errorElement = document.createElement("label");
+         errorElement.classList.add("error");
+
+         if (
+            "required" in element.dataset &&
+            !element.value &&
+            !element.nextElementSibling.classList.contains("error")
+         ) {
+            errorElement.innerText = "Обязательное поле";
+            element.after(errorElement);
+         }
+
+         if (flag && element.nextElementSibling.classList.contains("error")) {
+            flag = false;
+         }
+      });
+
+      if (!flag) {
+         event.preventDefault();
+      }
+   }
+}
+
 var formDef1 = [
-   { label: "Разработчики:", kind: "longtext", name: "author" },
-   { label: "Название сайта:", kind: "longtext", name: "sitename" },
-   { label: "URL сайта:", kind: "longtext", name: "siteurl" },
-   { label: "Дата запуска сайта:", kind: "date", name: "startdate" },
-   { label: "Посетителей в сутки:", kind: "number", name: "visitors" },
-   { label: "E-mail для связи:", kind: "shorttext", name: "email" },
    {
-      label: "Рубрика каталога:",
+      label: "Разработчики*",
+      kind: "longtext",
+      name: "author",
+      required: "true",
+   },
+   {
+      label: "Название сайта*",
+      kind: "longtext",
+      name: "sitename",
+      required: "true",
+   },
+   { label: "URL сайта*", kind: "longtext", name: "siteurl", required: "true" },
+   {
+      label: "Дата запуска сайта*",
+      kind: "date",
+      name: "startdate",
+      required: "true",
+   },
+   {
+      label: "Посетителей в сутки*",
+      kind: "number",
+      name: "visitors",
+      required: "true",
+   },
+   {
+      label: "E-mail для связи*",
+      kind: "shorttext",
+      name: "email",
+      required: "true",
+   },
+   {
+      label: "Рубрика каталога",
       kind: "combo",
       name: "division",
       variants: [
@@ -119,7 +218,7 @@ var formDef1 = [
       ],
    },
    {
-      label: "Размещение:",
+      label: "Размещение",
       kind: "radio",
       name: "payment",
       variants: [
@@ -128,17 +227,15 @@ var formDef1 = [
          { text: "VIP", value: 3 },
       ],
    },
-   { label: "Разрешить отзывы:", kind: "check", name: "votes" },
-   { label: "Описание сайта:", kind: "memo", name: "description" },
+   { label: "Разрешить отзывы", kind: "check", name: "votes" },
+   {
+      label: "Описание сайта",
+      kind: "memo",
+      name: "description",
+   },
    { caption: "Опубликовать", kind: "submit" },
 ];
 
-var formDef2 = [
-   { label: "Фамилия:", kind: "longtext", name: "lastname" },
-   { label: "Имя:", kind: "longtext", name: "firstname" },
-   { label: "Отчество:", kind: "longtext", name: "secondname" },
-   { label: "Возраст:", kind: "number", name: "age" },
-   { caption: "Зарегистрироваться", kind: "submit" },
-];
-
-createForm(document.forms.form1, formDef1);
+const form = document.forms.form1;
+createForm(form, formDef1);
+validForm(form);

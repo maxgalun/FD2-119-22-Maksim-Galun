@@ -108,7 +108,7 @@ function createForm(form, dataArray) {
 }
 
 function validForm(form) {
-   let isNullValidation = false;
+   let isNullValidation = false; //признак проверки поля на пустое значение
 
    form.addEventListener("focusout", focusoutHandler);
    form.addEventListener("submit", submitHandler);
@@ -152,7 +152,7 @@ function validForm(form) {
    }
 
    function submitHandler(event) {
-      let flag = true; //признак валидации
+      let hasError = false; //признак наличия ошибки валидации
 
       [...form.elements].forEach((element) => {
          const errorElement = document.createElement("label");
@@ -167,14 +167,17 @@ function validForm(form) {
             element.after(errorElement);
          }
 
-         if (flag && element.nextElementSibling.classList.contains("error")) {
+         if (
+            !hasError &&
+            element.nextElementSibling.classList.contains("error")
+         ) {
             element.scrollIntoView();
             element.focus();
-            flag = false;
+            hasError = true;
          }
       });
 
-      if (!flag) {
+      if (hasError) {
          isNullValidation = true;
          event.preventDefault();
       }

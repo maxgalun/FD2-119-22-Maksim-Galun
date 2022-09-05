@@ -245,6 +245,5 @@ var formDef1 = [
    { caption: "Опубликовать", kind: "submit" },
 ];
 
-const form = document.forms.form1;
-createForm(form, formDef1);
-validForm(form);
+createForm(document.forms.form1, formDef1);
+validForm(document.forms.form1);
